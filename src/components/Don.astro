@@ -1,0 +1,164 @@
+<section id="don" class="don">
+  <div class="container">
+    <div class="don__header" data-reveal>
+      <div class="eyebrow don__eyebrow">Agir avec nous</div>
+      <h2 class="don__title">Rejoignez le mouvement pour un développement plus juste et plus humain</h2>
+      <p class="don__lead">
+        Votre générosité est un acte de dignité. Chaque don permet à une jeune fille de rester à l'école.
+      </p>
+    </div>
+
+    <div class="don__grid" data-reveal-group>
+      <div class="don__card">
+        <div class="don__card-title">Devenir partenaire</div>
+        <p class="don__card-text">
+          Institutions, entreprises, collectivités : unissons nos expertises pour co-construire des solutions
+          durables.
+        </p>
+        <a href="#contact" class="don__card-link">Demander le dossier →</a>
+      </div>
+      <div class="don__card">
+        <div class="don__card-title">Devenir bénévole</div>
+        <p class="don__card-text">
+          Mettez vos compétences et votre énergie au service de l'intérêt général au sein de notre réseau de
+          volontaires.
+        </p>
+        <a href="#contact" class="don__card-link">Rejoindre le réseau →</a>
+      </div>
+      <div class="don__card">
+        <div class="don__card-title">Soutenir un projet</div>
+        <p class="don__card-text">
+          Parrainez la réhabilitation d'une latrine scolaire, la dotation d'un kit d'hygiène ou l'animation d'un
+          club scolaire.
+        </p>
+        <a href="#contact" class="don__card-link">Choisir un projet →</a>
+      </div>
+      <div class="don__card don__card--highlighted">
+        <div class="don__card-title">Faire un don</div>
+        <p class="don__card-text">
+          Un don ponctuel ou régulier, en toute sécurité. 1 kit « Menstru'Prévention » = 1 adolescente accompagnée
+          pour l'année. Contactez-nous au <strong>(+225) 07 48 02 58 54</strong> pour organiser votre don.
+        </p>
+        <a href="tel:+2250748025854" class="btn btn-accent">Je fais un don sécurisé</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .don {
+    padding: 96px 48px;
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .don__header {
+    max-width: 660px;
+    margin-bottom: 48px;
+  }
+
+  .don__eyebrow {
+    margin-bottom: 18px;
+  }
+
+  .don__title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1.1;
+    margin: 0 0 18px;
+    color: var(--color-green-darkest);
+    letter-spacing: -0.015em;
+    text-wrap: pretty;
+  }
+
+  .don__lead {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-text-body);
+    margin: 0;
+  }
+
+  .don__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .don__card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-color 0.4s ease;
+  }
+
+  .don__card:hover {
+    transform: translateY(-6px);
+    border-color: var(--color-green);
+    box-shadow: 0 20px 40px -18px rgba(0, 64, 31, 0.22);
+  }
+
+  .don__card--highlighted {
+    background: var(--color-green);
+    color: var(--color-cream);
+    border-color: var(--color-green);
+  }
+
+  .don__card--highlighted:hover {
+    box-shadow: 0 20px 40px -18px rgba(0, 64, 31, 0.45);
+  }
+
+  .don__card-title {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--color-green-darkest);
+  }
+
+  .don__card--highlighted .don__card-title {
+    color: var(--color-bg);
+  }
+
+  .don__card-text {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--color-text-body);
+    flex: 1;
+  }
+
+  .don__card--highlighted .don__card-text {
+    color: var(--color-cream);
+    opacity: 0.85;
+  }
+
+  .don__card-link {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-green-light);
+    display: inline-block;
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  .don__card-link:hover {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 1000px) {
+    .don__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .don {
+      padding: 56px 20px;
+    }
+
+    .don__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

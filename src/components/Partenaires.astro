@@ -1,0 +1,130 @@
+---
+const partners = [
+  { name: 'FCIL/CFLI — Fonds Canadien d\'Initiatives Locales', logo: '/partenaires/fcil-cfli.png' },
+  { name: 'Gouvernement du Canada', logo: '/partenaires/gouvernement-canada.png' },
+  { name: 'Coopération Allemande', logo: '/partenaires/cooperation-allemande.png' },
+  { name: 'Ambassade d\'Allemagne à Abidjan', logo: '/partenaires/ambassade-allemagne.png' },
+  { name: 'Verbatims CI', logo: '/partenaires/verbatims-ci.png' },
+  { name: 'REFORMAF', logo: '/partenaires/reformaf.png' },
+  { name: 'CCESP', logo: '/partenaires/ccesp.png' },
+  { name: 'MENAET', logo: '/partenaires/menaet.png' },
+  { name: 'Ministère de la Santé, de l\'Hygiène Publique et de la CMU', logo: '/partenaires/ministere-sante-crest.png' },
+  { name: 'PNLS', logo: '/partenaires/pnls.png' },
+  { name: 'Banque Africaine de Développement', logo: '/partenaires/banque-africaine-developpement.png' },
+  { name: 'PRO-KIDS', logo: '/partenaires/pro-kids.png' },
+];
+---
+
+<section class="partenaires">
+  <div class="container">
+    <div class="partenaires__header" data-reveal>
+      <span class="eyebrow">Nos partenaires et réseaux</span>
+    </div>
+
+    <div class="partenaires__marquee" data-reveal>
+      <div class="partenaires__track">
+        {[...partners, ...partners].map((partner, i) => (
+          <div class="partenaires__item" aria-hidden={i >= partners.length ? 'true' : undefined}>
+            {partner.logo ? (
+              <img src={partner.logo} alt={partner.name} />
+            ) : (
+              <span class="partenaires__fallback">{partner.name}</span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .partenaires {
+    padding: 72px 48px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .partenaires__header {
+    margin-bottom: 36px;
+  }
+
+  .partenaires__marquee {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 64px, #000 calc(100% - 64px), transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 64px, #000 calc(100% - 64px), transparent);
+  }
+
+  .partenaires__track {
+    display: flex;
+    width: max-content;
+    animation: partenaires-scroll 34s linear infinite;
+  }
+
+  .partenaires__marquee:hover .partenaires__track {
+    animation-play-state: paused;
+  }
+
+  @keyframes partenaires-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .partenaires__track {
+      animation: none;
+    }
+  }
+
+  .partenaires__item {
+    flex: 0 0 auto;
+    width: 200px;
+    background: var(--color-bg);
+    height: 98px;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    border-right: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .partenaires__item:hover {
+    background: var(--color-bg-alt);
+  }
+
+  .partenaires__item img {
+    max-width: 100%;
+    max-height: 66px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .partenaires__fallback {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 10.5px;
+    color: #6e7c71;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 700px) {
+    .partenaires {
+      padding: 48px 20px;
+    }
+
+    .partenaires__item {
+      width: 150px;
+      height: 84px;
+      padding: 10px;
+    }
+
+    .partenaires__item img {
+      max-height: 52px;
+    }
+  }
+</style>

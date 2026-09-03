@@ -1,0 +1,62 @@
+<div class="topbar">
+  <span class="topbar__tagline">ONG ivoirienne — apolitique, laïque, à but non lucratif — agréée depuis 2020</span>
+  <span class="topbar__contacts">
+    <span>inadec.ci@gmail.com</span>
+    <span class="topbar__phone">(+225) 07 07 88 37 82</span>
+    <span class="topbar__handle">@ONGINADEC</span>
+  </span>
+</div>
+
+<style>
+  .topbar {
+    background: var(--color-green);
+    color: var(--color-cream);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    padding: 9px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .topbar__tagline {
+    opacity: 0.82;
+  }
+
+  .topbar__contacts {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    opacity: 0.82;
+  }
+
+  .topbar__contacts span {
+    white-space: nowrap;
+  }
+
+  .topbar__handle {
+    color: var(--color-tan);
+  }
+
+  @media (max-width: 780px) {
+    .topbar {
+      padding: 9px 20px;
+    }
+    .topbar__tagline {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .topbar {
+      gap: 12px;
+    }
+    .topbar__contacts {
+      gap: 12px;
+    }
+    .topbar__phone {
+      display: none;
+    }
+  }
+</style>

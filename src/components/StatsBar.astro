@@ -1,0 +1,135 @@
+---
+const stats = [
+  { value: '05', suffix: '', text: "années d'engagement citoyen et de plaidoyer de proximité" },
+  { value: '600', suffix: '+', text: "adolescentes formées à la gestion de l'hygiène menstruelle" },
+  { value: '08', suffix: '', text: 'régions d’intervention, du Cavally au Bounkani' },
+  { value: '13', suffix: '', text: 'partenaires stratégiques, institutionnels et techniques' },
+];
+---
+
+<section class="stats">
+  <div class="container stats__inner">
+    <div class="stats__label" data-reveal>Bilan 2021 – 2025</div>
+    <div class="stats__grid" data-reveal-group>
+      {stats.map((stat) => (
+        <div class="stats__item">
+          <div class="stats__value">
+            <span class="stats__count" data-count-to={parseInt(stat.value, 10)} data-pad={stat.value.length}>0</span>
+            {stat.suffix && <span class="stats__suffix">{stat.suffix}</span>}
+          </div>
+          <div class="stats__text">{stat.text}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats {
+    background: var(--color-green);
+    color: var(--color-cream);
+    padding: 52px 48px;
+  }
+
+  .stats__inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .stats__label {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-tan);
+    padding-top: 8px;
+    min-width: 150px;
+  }
+
+  .stats__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 40px;
+    flex: 1;
+    min-width: 280px;
+  }
+
+  .stats__value {
+    font-family: var(--font-serif);
+    font-size: 52px;
+    line-height: 1;
+    color: var(--color-bg);
+  }
+
+  .stats__suffix {
+    font-size: 30px;
+  }
+
+  .stats__text {
+    font-size: 14px;
+    line-height: 1.45;
+    margin-top: 10px;
+    opacity: 0.85;
+  }
+
+  @media (max-width: 780px) {
+    .stats {
+      padding: 40px 20px;
+    }
+
+    .stats__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+  }
+</style>
+
+<script>
+  const section = document.querySelector('.stats');
+  const counters = document.querySelectorAll<HTMLElement>('.stats__count');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const runCount = (el: HTMLElement) => {
+    const target = Number(el.dataset.countTo || '0');
+    const pad = Number(el.dataset.pad || '0');
+
+    if (reduceMotion) {
+      el.textContent = String(target).padStart(pad, '0');
+      return;
+    }
+
+    const duration = 1300;
+    const start = performance.now();
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.round(target * eased);
+      el.textContent = String(value).padStart(pad, '0');
+
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  if (section) {
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              counters.forEach(runCount);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.4 }
+      );
+      observer.observe(section);
+    } else {
+      counters.forEach(runCount);
+    }
+  }
+</script>

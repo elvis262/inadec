@@ -1,0 +1,134 @@
+---
+const regions = ['Cavally', 'Guémon', 'Gontougo', 'Bounkani', 'Lagunes', 'Haut-Sassandra', "District d'Abidjan"];
+---
+
+<section id="impact" class="impact">
+  <div class="container impact__grid">
+    <div data-reveal-group>
+      <div class="eyebrow impact__eyebrow">Notre impact</div>
+      <h2 class="impact__title">Cinq ans d'action,<br />des vies transformées</h2>
+      <p class="impact__lead">
+        Plus de 600 bénéficiaires directs, 28 personnes ressources formées, des milliers de vies impactées par
+        ricochet — à Abidjan, Abobo, Yopougon, Bouaké, Man, Guiglo, Duékoué, Korhogo, Biankouma, Koun-Fao et bien
+        d'autres localités.
+      </p>
+      <div class="impact__tags" data-reveal-group>
+        {regions.map((region) => (
+          <span class="impact__tag">{region}</span>
+        ))}
+      </div>
+    </div>
+
+    <div class="impact__testimonial" data-reveal>
+      <div class="impact__testimonial-quote">
+        « Avant INADEC, j'avais honte et je manquais l'école. Aujourd'hui, je fabrique mes propres serviettes et
+        j'aide mes camarades. <em>Je vais à l'école la tête haute.</em> »
+      </div>
+      <div class="impact__testimonial-author">
+        Bénéficiaire — Collège Moderne des Jeunes Filles Dominique Ouattara de Yaoudé-Guiglo
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .impact {
+    padding: 96px 48px;
+    background: var(--color-green-darkest);
+    color: var(--color-cream);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .impact__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+
+  .impact__eyebrow {
+    color: var(--color-tan);
+    margin-bottom: 20px;
+  }
+
+  .impact__title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1.1;
+    margin: 0 0 24px;
+    color: var(--color-bg);
+    letter-spacing: -0.015em;
+  }
+
+  .impact__lead {
+    font-size: 16.5px;
+    line-height: 1.65;
+    margin: 0 0 34px;
+    opacity: 0.82;
+    max-width: 480px;
+  }
+
+  .impact__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 34px;
+  }
+
+  .impact__tag {
+    border: 1px solid rgba(237, 242, 230, 0.28);
+    padding: 7px 14px;
+    font-size: 13px;
+    border-radius: 999px;
+    transition: border-color 0.25s ease, background-color 0.25s ease;
+  }
+
+  .impact__tag:hover {
+    border-color: var(--color-tan);
+    background: rgba(240, 190, 138, 0.1);
+  }
+
+  .impact__testimonial {
+    border-left: 2px solid var(--color-orange);
+    padding-left: 40px;
+  }
+
+  .impact__testimonial-quote {
+    font-family: var(--font-serif);
+    font-size: 30px;
+    line-height: 1.45;
+    color: var(--color-bg);
+    text-wrap: pretty;
+  }
+
+  .impact__testimonial-quote em {
+    color: var(--color-tan);
+    font-style: italic;
+  }
+
+  .impact__testimonial-author {
+    margin-top: 26px;
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 900px) {
+    .impact {
+      padding: 56px 20px;
+    }
+
+    .impact__grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .impact__testimonial {
+      border-left: none;
+      border-top: 2px solid var(--color-orange);
+      padding-left: 0;
+      padding-top: 32px;
+    }
+  }
+</style>

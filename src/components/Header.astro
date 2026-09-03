@@ -1,0 +1,271 @@
+---
+const navLinks = [
+  { href: '/#accueil', label: 'Accueil' },
+  { href: '/#projets', label: 'Projets' },
+  { href: '/#domaines', label: 'Domaines' },
+  { href: '/#qui-sommes-nous', label: 'Qui sommes-nous' },
+  { href: '/#impact', label: 'Impact' },
+  { href: '/#actualites', label: 'Actualités' },
+  { href: '/galerie', label: 'Galerie' },
+  { href: '/#contact', label: 'Contact' },
+];
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="/#accueil" class="brand">
+      <img src="/logo-inadec.jpg" alt="Logo INADEC" class="brand__logo" />
+      <div class="brand__text">
+        <div class="brand__name">INADEC</div>
+        <div class="brand__baseline">Initiative Nationale pour le Développement Communautaire</div>
+      </div>
+    </a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+    <nav class="site-nav" id="site-nav">
+      {navLinks.map((link) => (
+        <a href={link.href} class="site-nav__link">
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <a href="/#don" class="btn btn-primary site-header__cta">Faire un don</a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(250, 250, 246, 0.94);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-border);
+    transition: box-shadow 0.35s var(--ease-out);
+  }
+
+  .site-header.is-scrolled {
+    box-shadow: 0 10px 30px -14px rgba(0, 64, 31, 0.22);
+  }
+
+  .brand__logo {
+    transition: transform 0.35s var(--ease-out);
+  }
+
+  .brand:hover .brand__logo {
+    transform: scale(1.05) rotate(-2deg);
+  }
+
+  .site-header__inner {
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .brand__logo {
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+  }
+
+  .brand__text {
+    line-height: 1.1;
+  }
+
+  .brand__name {
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    color: var(--color-orange);
+  }
+
+  .brand__baseline {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.03em;
+  }
+
+  .site-nav {
+    display: flex;
+    gap: 26px;
+    margin-left: auto;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .site-nav__link {
+    color: var(--color-green);
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.3s var(--ease-out);
+  }
+
+  .site-nav__link:hover,
+  .site-nav__link--active {
+    color: var(--color-green);
+    border-bottom-color: var(--color-orange);
+  }
+
+  .site-header__cta {
+    padding: 12px 22px;
+    font-size: 13.5px;
+    white-space: nowrap;
+  }
+
+  .site-header__cta:hover {
+    background: var(--color-orange);
+    color: var(--color-green-darkest);
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    margin-left: auto;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+  }
+
+  .nav-toggle__bar {
+    width: 22px;
+    height: 2px;
+    background: var(--color-green-darkest);
+    display: block;
+    transition: transform 0.3s var(--ease-out), opacity 0.2s ease;
+  }
+
+  .nav-toggle.is-active .nav-toggle__bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav-toggle.is-active .nav-toggle__bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.is-active .nav-toggle__bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (max-width: 1000px) {
+    .site-header__inner {
+      padding: 14px 20px;
+      gap: 16px;
+    }
+
+    .brand__baseline {
+      display: none;
+    }
+
+    .nav-toggle {
+      display: flex;
+    }
+
+    .site-nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      flex-direction: column;
+      gap: 0;
+      padding: 0 20px;
+      margin-left: 0;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.4s var(--ease-out), opacity 0.3s ease, padding 0.4s var(--ease-out);
+    }
+
+    .site-nav.is-open {
+      display: flex;
+      max-height: 420px;
+      opacity: 1;
+      padding: 8px 20px 16px;
+    }
+
+    .site-nav__link {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .site-header__cta {
+      order: 3;
+      padding: 10px 16px;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('site-nav');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('is-open');
+    toggle.classList.toggle('is-active', Boolean(isOpen));
+    toggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
+  });
+
+  nav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('is-open');
+      toggle?.classList.remove('is-active');
+      toggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  const navLinkEls = Array.from(document.querySelectorAll<HTMLAnchorElement>('.site-nav__link'));
+
+  const currentPath = window.location.pathname;
+  navLinkEls.forEach((a) => {
+    const href = a.getAttribute('href');
+    if (href && !href.includes('#') && href === currentPath) {
+      a.classList.add('site-nav__link--active');
+    }
+  });
+
+  const sectionIds = navLinkEls
+    .map((a) => a.getAttribute('href'))
+    .filter((h): h is string => !!h && h.startsWith('/#'))
+    .map((h) => h.slice(2));
+  const sections = sectionIds
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => el !== null);
+
+  if (sections.length && 'IntersectionObserver' in window) {
+    const setActive = (id: string) => {
+      navLinkEls.forEach((a) => {
+        a.classList.toggle('site-nav__link--active', a.getAttribute('href') === `/#${id}`);
+      });
+    };
+
+    const spy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+    );
+
+    sections.forEach((el) => spy.observe(el));
+  }
+</script>

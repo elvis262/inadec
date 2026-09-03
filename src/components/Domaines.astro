@@ -1,0 +1,192 @@
+---
+const domaines = [
+  {
+    number: '01 — Le cœur de notre engagement',
+    title: 'Santé et hygiène menstruelle',
+    text: "L'INADEC combat la précarité menstruelle, cause majeure de décrochage scolaire. Notre approche est triple : éducation, autonomisation et infrastructure — ateliers de serviettes hygiéniques réutilisables, kits « Menstru'Prévention », réhabilitation de blocs de latrines inclusifs.",
+    footnote: 'Soutenu par le FCIL 2026-2027',
+    highlighted: true,
+  },
+  {
+    number: '02',
+    title: 'Éducation et maintien scolaire des filles',
+    text: "Nous luttons contre les grossesses précoces et les abandons scolaires. Nous plaidons pour des écoles sûres, dotées d'infrastructures WASH adaptées, et créons des clubs scolaires pour faire des élèves les ambassadrices du changement.",
+  },
+  {
+    number: '03',
+    title: 'Protection des femmes et des jeunes filles',
+    text: 'Prévention et prise en charge des violences basées sur le genre. Promotion des droits sexuels et reproductifs. Renforcement de l\'autonomie et du pouvoir d\'agir des femmes.',
+  },
+  {
+    number: '04',
+    title: 'Autonomisation économique et leadership',
+    text: 'Formation aux activités génératrices de revenus, alphabétisation fonctionnelle et développement du leadership féminin et juvénile.',
+  },
+  {
+    number: '05',
+    title: 'Développement communautaire et cohésion sociale',
+    text: 'Médiation, dialogue intercommunautaire et prévention des conflits. Nous valorisons le patrimoine culturel — à l\'image de la protection des forêts sacrées de Biankouma — comme levier de paix et de résilience.',
+  },
+  {
+    number: '06',
+    title: 'Santé et bien-être communautaire',
+    text: 'Nous œuvrons à rapprocher les services de santé de base des populations et à promouvoir des comportements favorables à la santé préventive.',
+  },
+];
+---
+
+<section id="domaines" class="domaines">
+  <div class="container">
+    <div class="domaines__header" data-reveal>
+      <div>
+        <div class="eyebrow domaines__eyebrow">Nos domaines d'intervention</div>
+        <h2 class="domaines__title">Des interventions ciblées,<br />pour un impact durable</h2>
+      </div>
+      <p class="domaines__intro">
+        Une approche holistique et participative, qui place l'humain — et singulièrement la femme et la jeune
+        fille — au centre de toutes nos stratégies.
+      </p>
+    </div>
+
+    <div class="domaines__grid" data-reveal-group>
+      {domaines.map((domaine) => (
+        <div class:list={['domaines__card', { 'domaines__card--highlighted': domaine.highlighted }]}>
+          <div class="domaines__card-number">{domaine.number}</div>
+          <h3 class="domaines__card-title">{domaine.title}</h3>
+          <p class="domaines__card-text">{domaine.text}</p>
+          {domaine.footnote && <span class="domaines__card-footnote">{domaine.footnote}</span>}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .domaines {
+    padding: 96px 48px;
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .domaines__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .domaines__eyebrow {
+    margin-bottom: 16px;
+  }
+
+  .domaines__title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    margin: 0;
+    color: var(--color-green-darkest);
+  }
+
+  .domaines__intro {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text-body);
+    max-width: 380px;
+    margin: 0;
+  }
+
+  .domaines__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border: 1px solid var(--color-border-alt);
+  }
+
+  .domaines__card {
+    background: var(--color-bg);
+    padding: 38px 34px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 250px;
+    transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+    position: relative;
+    z-index: 1;
+    border-right: 1px solid var(--color-border-alt);
+    border-bottom: 1px solid var(--color-border-alt);
+  }
+
+  .domaines__card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px -18px rgba(0, 64, 31, 0.28);
+    z-index: 2;
+  }
+
+  .domaines__card--highlighted {
+    background: var(--color-green);
+    color: var(--color-cream);
+    min-height: 270px;
+  }
+
+  .domaines__card-number {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .domaines__card--highlighted .domaines__card-number {
+    color: var(--color-tan);
+  }
+
+  .domaines__card-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--color-green-darkest);
+  }
+
+  .domaines__card--highlighted .domaines__card-title {
+    color: var(--color-bg);
+  }
+
+  .domaines__card-text {
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--color-text-body);
+  }
+
+  .domaines__card--highlighted .domaines__card-text {
+    color: var(--color-cream);
+    opacity: 0.85;
+  }
+
+  .domaines__card-footnote {
+    margin-top: auto;
+    font-size: 12.5px;
+    color: var(--color-tan);
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 1000px) {
+    .domaines__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 700px) {
+    .domaines {
+      padding: 56px 20px;
+    }
+
+    .domaines__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,246 @@
+---
+const infoCards = [
+  { label: 'Durée', value: '01/09/2026 → 28/02/2027' },
+  { label: 'Partenaire financier', value: 'FCIL 2026-27' },
+  { label: 'Zone', value: 'Guiglo · Duékoué · Koun-Fao' },
+];
+
+const results = [
+  { value: '23', text: 'ateliers de formation' },
+  { value: '08', text: 'blocs de latrines réhabilités' },
+  { value: '400', text: 'kits « Menstru\'Prévention » distribués' },
+  { value: '04', text: 'clubs scolaires de plaidoyer créés' },
+  { value: '20', text: 'personnes ressources outillées' },
+];
+---
+
+<section id="projets" class="projet">
+  <div class="container">
+    <div class="projet__eyebrow-row">
+      <span class="eyebrow">À la une</span>
+      <span class="projet__rule"></span>
+      <span class="projet__eyebrow-note">Projet phare 2026 – 2027</span>
+    </div>
+
+    <div class="projet__grid">
+      <div data-reveal-group>
+        <h2 class="projet__title">Milieu scolaire<br />et santé féminine</h2>
+        <p class="projet__lead">
+          Avec l'appui du Fonds Canadien d'Initiatives Locales, l'INADEC intervient à Guiglo, Duékoué et Koun-Fao
+          pour briser les tabous, autonomiser 400 adolescentes et restaurer la dignité par l'accès à une hygiène
+          menstruelle sûre et à des infrastructures scolaires décentes.
+        </p>
+
+        <div class="projet__info-cards">
+          {infoCards.map((card) => (
+            <div class="projet__info-card">
+              <div class="projet__info-label">{card.label}</div>
+              <div class="projet__info-value">{card.value}</div>
+            </div>
+          ))}
+        </div>
+
+        <p class="projet__objectif">
+          <strong>Objectif général —</strong> renforcer la santé, le bien-être et la réussite scolaire de 400
+          adolescentes vulnérables.
+        </p>
+
+        <a href="#contact" class="btn btn-accent">Consulter la fiche technique détaillée</a>
+      </div>
+
+      <div>
+        <div class="projet__photos" data-reveal="scale">
+          <div class="projet__photo-frame">
+            <img src="/projets/signature-fcil-cfli.png" alt="Signature de l'accord FCIL/CFLI entre l'INADEC et l'Ambassade du Canada" class="projet__photo" />
+          </div>
+          <div class="projet__photo-frame">
+            <img src="/projets/ceremonie-ambassade-canada.png" alt="Cérémonie de signature à l'Ambassade du Canada en Côte d'Ivoire" class="projet__photo" />
+          </div>
+        </div>
+        <p class="projet__photo-caption">Signature de l'accord FCIL/CFLI — Ambassade du Canada en Côte d'Ivoire</p>
+
+        <div class="eyebrow projet__results-label">Résultats attendus</div>
+        <div class="projet__results" data-reveal-group>
+          {results.map((result) => (
+            <div class="projet__result">
+              <span class="projet__result-value">{result.value}</span>
+              <span class="projet__result-text">{result.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projet {
+    padding: 96px 48px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .projet__eyebrow-row {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 40px;
+  }
+
+  .projet__rule {
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  .projet__eyebrow-note {
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  .projet__grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .projet__title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 46px;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin: 0 0 22px;
+    color: var(--color-green-darkest);
+    text-wrap: pretty;
+  }
+
+  .projet__lead {
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--color-text-body);
+    margin: 0 0 30px;
+    max-width: 600px;
+    text-wrap: pretty;
+  }
+
+  .projet__info-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--color-border);
+    margin-bottom: 32px;
+  }
+
+  .projet__info-card {
+    background: var(--color-bg);
+    padding: 20px 22px;
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .projet__info-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 8px;
+  }
+
+  .projet__info-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-green);
+  }
+
+  .projet__objectif {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text-body);
+    margin: 0 0 26px;
+    max-width: 600px;
+  }
+
+  .projet__objectif strong {
+    color: var(--color-green-darkest);
+  }
+
+  .projet__photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    height: 230px;
+    margin-bottom: 10px;
+  }
+
+  .projet__photo-frame {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .projet__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s var(--ease-out);
+  }
+
+  .projet__photo-frame:hover .projet__photo {
+    transform: scale(1.06);
+  }
+
+  .projet__photo-caption {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin: 0 0 28px;
+  }
+
+  .projet__results-label {
+    margin-bottom: 16px;
+  }
+
+  .projet__results {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .projet__result {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    padding: 13px 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .projet__result:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .projet__result-value {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    color: var(--color-green-light);
+    min-width: 52px;
+  }
+
+  .projet__result-text {
+    font-size: 14.5px;
+    color: var(--color-text-body);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 900px) {
+    .projet {
+      padding: 56px 20px;
+    }
+
+    .projet__grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .projet__info-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

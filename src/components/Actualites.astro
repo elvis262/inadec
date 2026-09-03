@@ -1,0 +1,178 @@
+---
+const articles = [
+  {
+    image: '/activites/activite2.webp',
+    meta: 'Mai 2025 · Institutionnel',
+    title:
+      'Participation de l\'INADEC aux 60<sup>èmes</sup> Assemblées Annuelles de la Banque Africaine de Développement à Abidjan',
+  },
+  {
+    image: '/activites/activite1.jpg',
+    meta: 'Mars 2025 · Partenariats',
+    title:
+      "Audience de travail avec le Service de Coopération et d'Action Culturelle de l'Ambassade de France",
+  },
+  {
+    image: '/activites/activite3.jpg',
+    meta: 'Février 2025 · Projets',
+    title:
+      'Lancement du Projet PACTE avec le Ministère de la Fonction Publique et de la Modernisation de l\'Administration',
+  },
+  
+];
+
+const resources = [
+  { href: '#contact', title: 'Publications et rapports', text: "Études, notes de plaidoyer, rapports d'évaluation." },
+  { href: '/galerie', title: 'Médiathèque', text: 'Galerie photos, vidéos de terrain, infographies pédagogiques.' },
+  { href: '#contact', title: 'Communiqués officiels', text: 'Prises de position et annonces institutionnelles.' },
+  { href: '#projets', title: 'Projets réalisés', text: '2024 Guiglo · 2021 discours de haine · 2021 forêts sacrées.' },
+];
+---
+
+<section id="actualites" class="actualites">
+  <div class="container">
+    <div class="actualites__header" data-reveal>
+      <h2 class="actualites__title">Actualités et ressources</h2>
+    </div>
+
+    <div class="actualites__grid" data-reveal-group>
+      {articles.map((article) => (
+        <article class="actualites__article">
+          <div class="actualites__image-frame">
+            <img src={article.image} alt="" class="actualites__image" />
+          </div>
+          <div class="actualites__meta">{article.meta}</div>
+          <h3 class="actualites__article-title" set:html={article.title} />
+        </article>
+      ))}
+    </div>
+
+    <div class="actualites__resources" data-reveal-group>
+      {resources.map((resource) => (
+        <a href={resource.href} class="actualites__resource">
+          <div class="actualites__resource-title">{resource.title}</div>
+          <div class="actualites__resource-text">{resource.text}</div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .actualites {
+    padding: 96px 48px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .actualites__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 44px;
+    flex-wrap: wrap;
+  }
+
+  .actualites__title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 40px;
+    margin: 0;
+    color: var(--color-green-darkest);
+    letter-spacing: -0.015em;
+  }
+
+  .actualites__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+    margin-bottom: 56px;
+  }
+
+  .actualites__article {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .actualites__image-frame {
+    height: 190px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .actualites__image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s var(--ease-out);
+  }
+
+  .actualites__image-frame:hover .actualites__image {
+    transform: scale(1.06);
+  }
+
+  .actualites__meta {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-green-light);
+  }
+
+  .actualites__article-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 1.25;
+    margin: 0;
+    color: var(--color-green-darkest);
+  }
+
+  .actualites__resources {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--color-border);
+  }
+
+  .actualites__resource {
+    background: var(--color-bg);
+    padding: 26px 24px;
+    display: block;
+    transition: background-color 0.3s ease, transform 0.3s var(--ease-out);
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .actualites__resource:hover {
+    background: var(--color-bg-alt);
+    transform: translateY(-3px);
+  }
+
+  .actualites__resource-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-green-darkest);
+    margin-bottom: 8px;
+  }
+
+  .actualites__resource-text {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+  }
+
+  @media (max-width: 900px) {
+    .actualites {
+      padding: 56px 20px;
+    }
+
+    .actualites__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .actualites__resources {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

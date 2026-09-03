@@ -1,0 +1,213 @@
+---
+import { readdirSync } from 'node:fs';
+import Layout from '../layouts/Layout.astro';
+import TopBar from '../components/TopBar.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const galleryDir = new URL('../../public/galeries/', import.meta.url);
+const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.avif']);
+const photos = readdirSync(galleryDir)
+  .filter((file) => imageExtensions.has(file.slice(file.lastIndexOf('.')).toLowerCase()))
+  .sort()
+  .map((file) => `/galeries/${file}`);
+---
+
+<Layout
+  title="Médiathèque — INADEC"
+  description="Galerie photos de l'INADEC : photos de terrain, campagnes de sensibilisation et infographies pédagogiques."
+>
+  <TopBar />
+  <Header />
+
+  <section class="galerie-intro container">
+    <div class="galerie-intro__header" data-reveal>
+      <span class="eyebrow">Médiathèque</span>
+      <h1 class="galerie-intro__title">Galerie photos</h1>
+      <p class="galerie-intro__text">
+        Photos de terrain, campagnes de sensibilisation et infographies pédagogiques : un aperçu en images des
+        actions menées par l'INADEC auprès des communautés.
+      </p>
+    </div>
+  </section>
+
+  <section class="galerie container">
+    <div class="galerie__wall" data-reveal-group id="galerie-wall">
+      {photos.map((src) => (
+        <img
+          src={src}
+          alt="Photo terrain INADEC"
+          class="galerie__photo"
+          loading="lazy"
+          decoding="async"
+          data-lightbox-trigger
+        />
+      ))}
+    </div>
+  </section>
+
+  <div class="galerie-lightbox" id="galerie-lightbox" hidden>
+    <button type="button" class="galerie-lightbox__close" id="galerie-lightbox-close" aria-label="Fermer">
+      &times;
+    </button>
+    <img src="" alt="" class="galerie-lightbox__image" id="galerie-lightbox-image" />
+  </div>
+
+  <Footer />
+</Layout>
+
+<style>
+  .galerie-intro {
+    padding: 72px 48px 32px;
+  }
+
+  .galerie-intro__header {
+    max-width: 720px;
+  }
+
+  .galerie-intro__title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 48px;
+    margin: 14px 0 18px;
+    color: var(--color-green-darkest);
+    letter-spacing: -0.015em;
+  }
+
+  .galerie-intro__text {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--color-text-body);
+    margin: 0;
+  }
+
+  .galerie {
+    padding: 24px 48px 96px;
+  }
+
+  .galerie__wall {
+    columns: 4;
+    column-gap: 14px;
+  }
+
+  .galerie__photo {
+    break-inside: avoid;
+    margin-bottom: 14px;
+    width: 100%;
+    display: block;
+    border-radius: 2px;
+    border: 1px solid var(--color-border);
+    cursor: zoom-in;
+    transition: opacity 0.2s ease;
+  }
+
+  .galerie__photo:hover {
+    opacity: 0.92;
+  }
+
+  .galerie-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+
+  .galerie-lightbox[hidden] {
+    display: none;
+  }
+
+  .galerie-lightbox__image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .galerie-lightbox__close {
+    position: absolute;
+    top: 20px;
+    right: 28px;
+    background: none;
+    border: none;
+    color: var(--color-bg);
+    font-size: 40px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  @media (max-width: 1000px) {
+    .galerie__wall {
+      columns: 3;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .galerie-intro {
+      padding: 56px 20px 24px;
+    }
+
+    .galerie {
+      padding: 16px 20px 56px;
+    }
+
+    .galerie-intro__title {
+      font-size: 36px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .galerie__wall {
+      columns: 2;
+      column-gap: 10px;
+    }
+
+    .galerie__photo {
+      margin-bottom: 10px;
+    }
+  }
+
+  @media (max-width: 460px) {
+    .galerie__wall {
+      columns: 1;
+    }
+  }
+</style>
+
+<script>
+  const wall = document.getElementById('galerie-wall');
+  const lightbox = document.getElementById('galerie-lightbox');
+  const lightboxImage = document.getElementById('galerie-lightbox-image') as HTMLImageElement | null;
+  const closeBtn = document.getElementById('galerie-lightbox-close');
+
+  const openLightbox = (src: string, alt: string) => {
+    if (!lightbox || !lightboxImage) return;
+    lightboxImage.src = src;
+    lightboxImage.alt = alt;
+    lightbox.hidden = false;
+  };
+
+  const closeLightbox = () => {
+    if (!lightbox || !lightboxImage) return;
+    lightbox.hidden = true;
+    lightboxImage.src = '';
+  };
+
+  wall?.querySelectorAll<HTMLImageElement>('[data-lightbox-trigger]').forEach((img) => {
+    img.addEventListener('click', () => openLightbox(img.src, img.alt));
+  });
+
+  closeBtn?.addEventListener('click', closeLightbox);
+
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox && !lightbox.hidden) closeLightbox();
+  });
+</script>
