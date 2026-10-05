@@ -1,25 +1,5 @@
 ---
-const articles = [
-  {
-    image: '/activites/activite2.webp',
-    meta: 'Mai 2025 · Institutionnel',
-    title:
-      'Participation de l\'INADEC aux 60<sup>èmes</sup> Assemblées Annuelles de la Banque Africaine de Développement à Abidjan',
-  },
-  {
-    image: '/activites/activite1.jpg',
-    meta: 'Mars 2025 · Partenariats',
-    title:
-      "Audience de travail avec le Service de Coopération et d'Action Culturelle de l'Ambassade de France",
-  },
-  {
-    image: '/activites/activite3.jpg',
-    meta: 'Février 2025 · Projets',
-    title:
-      'Lancement du Projet PACTE avec le Ministère de la Fonction Publique et de la Modernisation de l\'Administration',
-  },
-  
-];
+import { articles } from '../data/articles';
 
 const resources = [
   { href: '#contact', title: 'Publications et rapports', text: "Études, notes de plaidoyer, rapports d'évaluation." },
@@ -36,15 +16,21 @@ const resources = [
     </div>
 
     <div class="actualites__grid" data-reveal-group>
-      {articles.map((article) => (
-        <article class="actualites__article">
-          <div class="actualites__image-frame">
-            <img src={article.image} alt="" class="actualites__image" />
-          </div>
-          <div class="actualites__meta">{article.meta}</div>
-          <h3 class="actualites__article-title" set:html={article.title} />
-        </article>
-      ))}
+      {articles.map((article) => {
+        const Tag = article.slug ? 'a' : 'article';
+        return (
+          <Tag
+            class:list={['actualites__article', article.slug && 'actualites__article--link']}
+            href={article.slug ? `/actualites/${article.slug}` : undefined}
+          >
+            <div class="actualites__image-frame">
+              <img src={article.image} alt="" class="actualites__image" />
+            </div>
+            <div class="actualites__meta">{article.meta}</div>
+            <h3 class="actualites__article-title" set:html={article.title} />
+          </Tag>
+        );
+      })}
     </div>
 
     <div class="actualites__resources" data-reveal-group>
@@ -84,7 +70,7 @@ const resources = [
 
   .actualites__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 36px;
     margin-bottom: 56px;
   }
@@ -93,6 +79,13 @@ const resources = [
     display: flex;
     flex-direction: column;
     gap: 16px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .actualites__article--link:hover .actualites__article-title {
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 
   .actualites__image-frame {

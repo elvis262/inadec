@@ -1,0 +1,121 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TopBar from '../../components/TopBar.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { articles } from '../../data/articles';
+
+export function getStaticPaths() {
+  return articles
+    .filter((article) => article.slug && article.sections)
+    .map((article) => ({ params: { slug: article.slug }, props: { article } }));
+}
+
+const { article } = Astro.props;
+---
+
+<Layout title={`${article.title} — INADEC`} description={article.title}>
+  <TopBar />
+  <Header />
+
+  <article class="article container">
+    <a href="/#actualites" class="article__back">← Retour aux actualités</a>
+
+    <header class="article__header" data-reveal>
+      <div class="article__meta">{article.meta}</div>
+      <h1 class="article__title">{article.title}</h1>
+    </header>
+
+    <img src={article.image} alt="" class="article__image" />
+
+    <div class="article__body" data-reveal-group>
+      {article.sections?.map((section) => (
+        <section class="article__section">
+          {section.heading && <h2 class="article__heading">{section.heading}</h2>}
+          {section.paragraphs.map((paragraph) => (
+            <p class="article__paragraph">{paragraph}</p>
+          ))}
+        </section>
+      ))}
+    </div>
+  </article>
+
+  <Footer />
+</Layout>
+
+<style>
+  .article {
+    max-width: 760px;
+    padding-top: 56px;
+    padding-bottom: 96px;
+  }
+
+  .article__back {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-green-light);
+    margin-bottom: 36px;
+  }
+
+  .article__back:hover {
+    color: var(--color-green);
+  }
+
+  .article__meta {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-green-light);
+    margin-bottom: 14px;
+  }
+
+  .article__title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--color-green-darkest);
+    margin: 0 0 32px;
+    text-wrap: balance;
+  }
+
+  .article__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--color-border);
+    margin-bottom: 44px;
+  }
+
+  .article__section + .article__section {
+    margin-top: 36px;
+  }
+
+  .article__heading {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.25;
+    color: var(--color-green-darkest);
+    margin: 0 0 14px;
+  }
+
+  .article__paragraph {
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--color-text-body);
+    margin: 0 0 16px;
+  }
+
+  .article__paragraph:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 600px) {
+    .article__title {
+      font-size: 30px;
+    }
+  }
+</style>
